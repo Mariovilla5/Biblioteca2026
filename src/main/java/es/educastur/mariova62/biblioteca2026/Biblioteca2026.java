@@ -693,5 +693,43 @@ public class Biblioteca2026 {
         }
     }
     //#endregion
+    public static boolean esInt(String s){
+        int n;
+        try {
+            n=Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException ex){
+            return false;
+        }
+    }
+
+    public static boolean esDouble(String s){
+        double n;
+        try {
+            n=Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException ex){
+            return false;
+        }
+    }
+    public static boolean validarDNI(String dni){
+        //Verificar que el DNI tiene un formato válido
+        if (dni.isBlank() || !dni.matches("\\d(8)[A-HJ-NP-TV-Z]")) {
+            return false;
+        }
+        
+        //extraer número y letra del DNI
+        String numeroStr=dni.substring(0, 8);
+        char letra=dni.charAt(8);
+        //calcular la letra correspondiente al numero del dni
+        char letraCalculada=calcularLetraDNI(Integer.parseInt(numeroStr));
+   
+        
+        return letra == letraCalculada;
+    }
+    public static char calcularLetraDNI(int numero){
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        return letras.charAt(numero % 23 );
+    }
 }    
         
