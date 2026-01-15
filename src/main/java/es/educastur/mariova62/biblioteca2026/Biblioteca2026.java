@@ -721,10 +721,10 @@ public class Biblioteca2026 {
                 .forEach(p->System.out.println(p));
     
   
-//        System.out.println("\nPrestamos activos de los libros del genero aventuras: ");
-//        libros.stream().filter(p->p.getFechaDev().isAfter(LocalDate.now()))
-//                && libros.stream().filter(l -> l.getGenero().equalsIgnoreCase("aventuras"))
-//                        .forEach(l->System.out.println());
+        System.out.println("\nPrestamos activos de los libros del genero aventuras: ");
+        prestamos.stream().filter(p->p.getLibroPrest().getGenero().equalsIgnoreCase("aventuras")
+        && p.getFechaDev().isAfter(LocalDate.now()))
+                .forEach(p->System.out.println(p));
     
     }
     
