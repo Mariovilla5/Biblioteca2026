@@ -9,7 +9,8 @@ package es.educastur.mariova62.biblioteca2026;
  * @author 1dawd07
  */
 public class Libro {
-   private String isbn;
+
+    private String isbn;
     private String titulo;
     private String autor;
     private String genero;
@@ -66,5 +67,5 @@ public class Libro {
     @Override
     public String toString() {
         return "[isbn= " + isbn + "\ttitulo= " + titulo + "\tautor= " + autor + "\tgenero= " + genero + "\tejemplares= " + ejemplares + "]";
-    } 
+    }
 }

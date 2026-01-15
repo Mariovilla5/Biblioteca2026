@@ -9,6 +9,7 @@ package es.educastur.mariova62.biblioteca2026;
  * @author 1dawd07
  */
 public class Usuario {
+
     private String dni;
     private String nombre;
     private String email;

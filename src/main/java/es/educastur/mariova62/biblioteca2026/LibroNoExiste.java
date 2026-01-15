@@ -8,8 +8,9 @@ package es.educastur.mariova62.biblioteca2026;
  *
  * @author 1dawd07
  */
-public class LibroNoExiste extends Exception{
-    public LibroNoExiste(String cadena){
-                super(cadena); //Llama al constructor de Exception y le pasa el contenido
+public class LibroNoExiste extends Exception {
+
+    public LibroNoExiste(String cadena) {
+        super(cadena); //Llama al constructor de Exception y le pasa el contenido
     }
 }
