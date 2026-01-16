@@ -9,27 +9,30 @@ package es.educastur.mariova62.biblioteca2026;
  */
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Biblioteca2026 {
-    
+
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<Libro> libros = new ArrayList();
     private static ArrayList<Usuario> usuarios = new ArrayList();
     private static ArrayList<Prestamo> prestamos = new ArrayList();
     private static ArrayList<Prestamo> prestamosHist = new ArrayList();
     private static LocalDate hoy = LocalDate.now();
-    
+
     public static void main(String[] args) {
-          cargaDatos();
-          listadosConStreams();
+        cargaDatos();
+//        listadosConStreams();
 //        cargaLibros();
 //        cargaUsuarios();
 //        cargaPrestamos();
 //        cargarPrestamosHist();
 //        
 //        menuPrincipal();
-        
+          ordenarConStrings();
+          
+
     }
 
     //#region CARGAR DATOS
@@ -39,7 +42,7 @@ public class Biblioteca2026 {
         cargaPrestamos();
         cargarPrestamosHist();
     }
-    
+
     public static void cargaLibros() {
         libros.add(new Libro("1-11", "El Hobbit", "JRR Tolkien", "Aventuras", 3));
         libros.add(new Libro("1-22", "El Silmarillon", "JRR Tolkien", "Aventuras", 3));
@@ -51,7 +54,7 @@ public class Biblioteca2026 {
         libros.add(new Libro("1-88", "El ultimo barco", "D.Villar", "Novela Negra", 3));
         libros.add(new Libro("1-99", "Ojos de agua", "D.Villar", "Novela Negra", 0));
     }
-    
+
     public static void cargaUsuarios() {
         usuarios.add(new Usuario("11", "Ana", "ana@email.com", "621111111"));
         usuarios.add(new Usuario("22", "David", "david@email.com", "622222222"));
@@ -60,7 +63,7 @@ public class Biblioteca2026 {
         usuarios.add(new Usuario("55", "Carlota", "carlota@email.com", "625555555"));
         usuarios.add(new Usuario("66", "Juan", "juan@email.com", "626666666"));
     }
-    
+
     public static void cargaPrestamos() {
         //PRESTAMOS "NORMALES" REALIZADOS HOY Y QUE SE HAN DE DEVOLVER EN 15 DÍAS
         prestamos.add(new Prestamo(libros.get(0), usuarios.get(0), hoy, hoy.plusDays(15)));
@@ -74,7 +77,7 @@ public class Biblioteca2026 {
         prestamos.add(new Prestamo(libros.get(2), usuarios.get(4), hoy.minusDays(20), hoy.minusDays(5)));
         prestamos.add(new Prestamo(libros.get(3), usuarios.get(4), hoy.minusDays(20), hoy.minusDays(5)));
     }
-    
+
     public static void cargarPrestamosHist() {
         //PRESTAMOS HISTORICOS QUE YA HAN SIDO DEVUELTOS Y POR TANTO ESTÁN EN LA COLECCION prestamosHist
         prestamosHist.add(new Prestamo(libros.get(0), usuarios.get(0), hoy.minusDays(20), hoy.minusDays(5)));
@@ -163,12 +166,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 2 - GESTION USUARIOS");
             System.out.println("\t| 3 - GESTION PRESTAMOS");
             System.out.println("\t| 4 - LISTADOS");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -186,7 +189,7 @@ public class Biblioteca2026 {
             }
         } while (opcion != 0);
     }
-    
+
     public static void menuLibros() {
         int opcion;
         do {
@@ -196,12 +199,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 2 - LISTADO DE LIBROS");
             System.out.println("\t| 3 - MODIFICAR LIBRO");
             System.out.println("\t| 4 - ELIMINAR LIBRO");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -220,7 +223,7 @@ public class Biblioteca2026 {
             }
         } while (opcion != 0);
     }
-    
+
     public static void menuUsuarios() {
         int opcion;
         do {
@@ -230,12 +233,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 2 - LISTADO DE USUARIOS");
             System.out.println("\t| 3 - MODIFICAR USUARIO");
             System.out.println("\t| 4 - ELIMINAR USUARIO");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -253,7 +256,7 @@ public class Biblioteca2026 {
             }
         } while (opcion != 0);
     }
-    
+
     public static void menuPrestamos() {
         int opcion;
         do {
@@ -264,12 +267,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 3 - PRORROGAR PRESTAMO");
             System.out.println("\t| 4 - LISTADO DE PRESTAMOS");
             System.out.println("\t| 5 - PRESTAMOS POR USUARIO");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -290,7 +293,7 @@ public class Biblioteca2026 {
             }
         } while (opcion != 0);
     }
-    
+
     public static void menuListados() {
         int opcion;
         do {
@@ -300,12 +303,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 2 - LISTADO DE USUARIOS");
             System.out.println("\t| 3 - LISTADO DE PRESTAMOS");
             System.out.println("\t| 4 - PRESTAMOS POR USUARIO");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -346,12 +349,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 3 - AUTOR");
             System.out.println("\t| 4 - GENERO");
             System.out.println("\t| 5 - EJEMPLARES");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -384,7 +387,7 @@ public class Biblioteca2026 {
             }
         } while (opcion != 0);
     }
-    
+
     public static void menuModificarUsuario() {
         System.out.print("Escribe el DNI del usuario a modificar: ");
         int usuarioPos = buscarUsuario(sc.next());
@@ -404,12 +407,12 @@ public class Biblioteca2026 {
             System.out.println("\t| 2 - NOMBRE");
             System.out.println("\t| 3 - EMAIL");
             System.out.println("\t| 4 - TELEFONO");
-            
+
             System.out.print("Teclea el numero: ");
-            
+
             opcion = sc.nextInt();
             System.out.println();
-            
+
             switch (opcion) {
                 // MENU DE OPCIONES
                 case 1 -> {
@@ -459,7 +462,7 @@ public class Biblioteca2026 {
         System.out.println("Genero:\t" + genero);
         System.out.println("Ejemplares:\t" + ejemplares);
     }
-    
+
     public static void crearUsuario() {
         System.out.println("Vamos a registrar un usuario nuevo");
         System.out.print("Escribe el DNI del usuario: ");
@@ -476,7 +479,7 @@ public class Biblioteca2026 {
         System.out.println("Email:\t" + email);
         System.out.println("Telefono:\t" + telefono);
     }
-    
+
     public static void crearPrestamo() {
         System.out.println("Vamos a hacer un prestamo");
         System.out.print("Escribe el DNI del usuario: ");
@@ -524,7 +527,7 @@ public class Biblioteca2026 {
         System.out.println("\n\tPrestamos\n");
         listarPrestamos();
     }
-    
+
     public static void listarLibros() {
         for (Libro l : libros) {
             System.out.print(l.getIsbn() == null ? "" : l.getIsbn() + "\t");
@@ -535,7 +538,7 @@ public class Biblioteca2026 {
             System.out.println();
         }
     }
-    
+
     public static void listarUsuarios() {
         for (Usuario u : usuarios) {
             System.out.print(u.getDni() == null ? "" : u.getDni() + "\t");
@@ -545,7 +548,7 @@ public class Biblioteca2026 {
             System.out.println();
         }
     }
-    
+
     public static void listarPrestamos() {
         for (Prestamo p : prestamos) {
             System.out.print(p.getLibroPrest() == null ? "" : p.getLibroPrest() + "\t");
@@ -555,7 +558,7 @@ public class Biblioteca2026 {
             System.out.println();
         }
     }
-    
+
     public static void listarPrestamosPorUsuario(String usuario) {
         int usuarioPos;
         if (usuario == null) {
@@ -601,7 +604,7 @@ public class Biblioteca2026 {
             libros.remove(libroPos);
         }
     }
-    
+
     public static void eliminarUsuario() {
         System.out.print("Escribe el DNI del usuario a eliminar: ");
         int usuarioPos = buscarUsuario(sc.next());
@@ -618,7 +621,7 @@ public class Biblioteca2026 {
             usuarios.remove(usuarioPos);
         }
     }
-    
+
     public static void eliminarPrestamo() {
         System.out.print("Escribe el DNI del usuario de la devolucion: ");
         String usuario = sc.next();
@@ -707,33 +710,56 @@ public class Biblioteca2026 {
         System.out.println("\nLibros de la seccion aventuras: ");
         libros.stream().filter(l -> l.getGenero().equalsIgnoreCase("aventuras")
                 || l.getAutor().equalsIgnoreCase("jrr tolkien"))
-                .forEach(l->System.out.println(l));
-                
+                .forEach(l -> System.out.println(l));
+
         System.out.println("\nPrestamos fuera de plazo: ");
-        prestamos.stream().filter(p->p.getFechaDev().isBefore(LocalDate.now()))
-                      .forEach(p->System.out.println(p));
-              
+        prestamos.stream().filter(p -> p.getFechaDev().isBefore(LocalDate.now()))
+                .forEach(p -> System.out.println(p));
+
         System.out.println("\nPrestamos activos y no activos de un usuario(TECLEAR NOMBRE): ");
         String nombre = sc.next();
-        prestamos.stream().filter(p->p.getUsuarioPrest().getNombre().equalsIgnoreCase(nombre))
-                .forEach(p->System.out.println(p));
-        prestamosHist.stream().filter(p->p.getUsuarioPrest().getNombre().equalsIgnoreCase(nombre))
-                .forEach(p->System.out.println(p));
-    
-  
+        prestamos.stream().filter(p -> p.getUsuarioPrest().getNombre().equalsIgnoreCase(nombre))
+                .forEach(p -> System.out.println(p));
+        prestamosHist.stream().filter(p -> p.getUsuarioPrest().getNombre().equalsIgnoreCase(nombre))
+                .forEach(p -> System.out.println(p));
+
         System.out.println("\nPrestamos activos de los libros del genero aventuras: ");
-        prestamos.stream().filter(p->p.getLibroPrest().getGenero().equalsIgnoreCase("aventuras")
-        && p.getFechaDev().isAfter(LocalDate.now()))
-                .forEach(p->System.out.println(p));
+        prestamos.stream().filter(p -> p.getLibroPrest().getGenero().equalsIgnoreCase("aventuras")
+                && p.getFechaDev().isAfter(LocalDate.now()))
+                .forEach(p -> System.out.println(p));
+
+    }
+
+    public static void ordenarConStrings() {
+        System.out.println("Listado de libros ordenados alfabeticamente por titulo: ");
+        libros.stream().sorted(Comparator.comparing(Libro::getAutor)).forEach(l->System.out.println(l));
+        
+        System.out.println("Listado de libros ordenados por fecha de prestamo: ");
+        prestamos.stream().sorted(Comparator.comparing(Prestamo::getFechaPrest)).forEach(p->System.out.println(p));
+        
+       System.out.println("Listado de libros ordenados por numero de prestamos: ");
+        libros.stream().sorted(Comparator.comparing(l->numPrestamosLibro(l.getIsbn()))).forEach(l->System.out.println(l));
+       
+        
+
+        //Comparator.comparing(Libro::getTitulo) = Como los quiero ordenar
+    
     
     }
     
-
-
-
-
-
-
-
+    public static int numPrestamosLibro(String isbn) {
+        int cont=0;
+        for (Prestamo p : prestamos) {
+            if (p.getLibroPrest().getIsbn().equalsIgnoreCase(isbn)){
+                cont++;
+            }
+        }
+        for (Prestamo p : prestamos) {
+            if (p.getLibroPrest().getIsbn().equalsIgnoreCase(isbn)){
+                cont++;
+        }
+       }
+        return cont;
+    }
 }//Llave final
 
